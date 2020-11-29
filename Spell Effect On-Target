@@ -1,0 +1,28 @@
+/// Ensures the user has only 1 token targeted.
+
+if(game.user.targets.size !== 1) return ui.notifications.warn(`Single Target Please`);
+
+let mainTarget = Array.from(game.user.targets)[0];
+let halfGrid = canvas.scene.data.grid/2;
+let tarX = (mainTarget.data.x + (mainTarget.data.width*halfGrid));
+let tarY = (mainTarget.data.y + (mainTarget.data.height*halfGrid));
+let tarScale = ((mainTarget.data.width + mainTarget.data.height)/2);
+let spellAnim = 
+                    {
+                     file: "modules/JB2A_DnD5e/Library/1st_Level/Cure_Wounds_INSTANTANEOUS/Cure_Wounds_Holy_200x200.webm",
+                      position: {
+                        x: tarX,
+                        y: tarY
+                      },
+                      anchor: {
+                       x: 0.5,
+                       y: 0.5
+                      },
+                      angle: 0,
+                      scale: {
+                       x: tarScale,
+                       y: tarScale
+                      }
+                    }; 
+canvas.fxmaster.playVideo(spellAnim);
+game.socket.emit('module.fxmaster', spellAnim);
