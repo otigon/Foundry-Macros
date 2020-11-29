@@ -1,0 +1,131 @@
+/// Error placed on screen if the caster (originating) token is not selected
+if(canvas.tokens.controlled.length == 0) return ui.notifications.error("Please select your token");
+/// Ensures only a single token is targeted
+if(game.user.targets.size !== 1) return ui.notifications.warn('Single Target Please');
+
+let myToken = canvas.tokens.controlled[0];
+let mainTarget = Array.from(game.user.targets)[0];
+let halfGrid = canvas.scene.data.grid/2;
+let srcX = (myToken.data.x + (myToken.data.width*halfGrid));
+let srcY = (myToken.data.y + (myToken.data.height*halfGrid));
+let tarX = (mainTarget.data.x + (mainTarget.data.width*halfGrid));
+let tarY = (mainTarget.data.y + (mainTarget.data.height*halfGrid));
+let outerRad = Math.sqrt(Math.pow(mainTarget.data.width*halfGrid,2) + Math.pow(myToken.data.width*halfGrid,2));
+
+let anDeg = -(Math.atan(((srcY - tarY)/(srcX - tarX)))*57.3);
+let anDist = Math.sqrt(Math.pow(srcX-tarX,2)+Math.pow(srcY-tarY,2));
+async function wait(ms) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
+let anFile = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_30ft_1200x400_01.webm";
+let anFileSize = 600;
+switch(true){
+ case (anDist<=300):
+    anFileSize = 1200;
+    anFile = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_30ft_1200x400_01.webm";
+    break;
+ case (anDist>600):
+    anFileSize = 2400;
+    anFile = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_60ft_2400x400_01.webm";
+    break;
+ default:
+    anFileSize = 2400;
+    anFile = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_60ft_2400x400_01.webm";
+    break;
+}
+
+let anFile2 = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_30ft_1200x400_02.webm";
+switch(true){
+ case (anDist<=300):
+    anFile2 = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_30ft_1200x400_02.webm";
+    break;
+ case (anDist>600):
+    anFile2 = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_60ft_2400x400_02.webm";
+    break;
+ default:
+    anFile2 = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_60ft_2400x400_02.webm";
+    break;
+}
+
+let anFile3 = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_30ft_1200x400_06.webm";
+switch(true){
+ case (anDist<=300):
+    anFile3 = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_30ft_1200x400_06.webm";
+    break;
+ case (anDist>600):
+    anFile3 = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_60ft_2400x400_06.webm";
+    break;
+ default:
+    anFile3 = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Purple_60ft_2400x400_06.webm";
+    break;
+}
+
+let anScale = Math.sqrt(Math.pow(srcX-tarX,2)+Math.pow(srcY-tarY,2))/anFileSize;
+let anScaleY = anScale;
+if (anDist<=600){anScaleY = 0.6}
+if (anDist>=800){anScaleY = anScale}
+
+if(srcX>tarX){anDeg = anDeg+180}
+if(srcX==tarX){if(srcY>tarY){anDeg=90}else{anDeg=-90}}
+
+let spellAnim = 
+                    {
+                     file: anFile,
+                      position: {
+                        x: srcX,
+                        y: srcY
+                      },
+                      anchor: {
+                       x: 0,
+                       y: 0.5
+                      },
+                      angle: anDeg,
+                      scale: {
+                       x: anScale,
+                       y: anScaleY
+                      }
+                    }; 
+let spellAnim2 = 
+                    {
+                     file: anFile2,
+                      position: {
+                        x: srcX,
+                        y: srcY
+                      },
+                      anchor: {
+                       x: 0,
+                       y: 0.5
+                      },
+                      angle: anDeg,
+                      scale: {
+                       x: anScale,
+                       y: anScaleY
+                      }
+                    }; 
+let spellAnim3 = 
+                    {
+                     file: anFile3,
+                      position: {
+                        x: srcX,
+                        y: srcY
+                      },
+                      anchor: {
+                       x: 0,
+                       y: 0.5
+                      },
+                      angle: anDeg,
+                      scale: {
+                       x: anScale,
+                       y: anScaleY
+                      }
+                    }; 
+canvas.fxmaster.playVideo(spellAnim);
+await wait (180);
+canvas.fxmaster.playVideo(spellAnim2);
+await wait (180);
+canvas.fxmaster.playVideo(spellAnim3);
+await wait (180);
+game.socket.emit('module.fxmaster', spellAnim,spellAnim2,spellAnim3);
