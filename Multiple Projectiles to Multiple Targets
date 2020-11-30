@@ -24,11 +24,11 @@ async function wait(ms) {
 let anFile = "modules/JB2A_DnD5e/Library/2nd_Level/Scorching_Ray_INSTANTANEOUS/Scorching_Ray_Orange_30ft_1200x200.webm";
 let anFileSize = 600;
 switch(true){
- case (anDist<=300):
+ case (anDist<=1200):
     anFileSize = 1200;
     anFile = "modules/JB2A_DnD5e/Library/2nd_Level/Scorching_Ray_INSTANTANEOUS/Scorching_Ray_Orange_30ft_1200x200.webm";
     break;
- case (anDist>600):
+ case (anDist>3600):
     anFileSize = 3600;
     anFile = "modules/JB2A_DnD5e/Library/2nd_Level/Scorching_Ray_INSTANTANEOUS/Scorching_Ray_Orange_90ft_3600x200.webm";
     break;
