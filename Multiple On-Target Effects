@@ -1,0 +1,73 @@
+if(game.user.targets.size !== 1) return ui.notifications.warn('Single Target Please');
+
+let mainTarget = Array.from(game.user.targets)[0];
+let halfGrid = canvas.scene.data.grid/2;
+let tarX = (mainTarget.data.x + (mainTarget.data.width*halfGrid));
+let tarY = (mainTarget.data.y + (mainTarget.data.height*halfGrid));
+let tarScale = ((mainTarget.data.width + mainTarget.data.height)/2);
+
+async function wait(ms) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
+
+let spellAnim = 
+                    {
+                     file: "modules/JB2A_DnD5e/Library/1st_Level/Cure_Wounds_INSTANTANEOUS/Cure_Wounds_Holy_200x200.webm",
+                      position: {
+                        x: tarX,
+                        y: tarY
+                      },
+                      anchor: {
+                       x: 0.5,
+                       y: 0.5
+                      },
+                      angle: 0,
+                      scale: {
+                       x: tarScale,
+                       y: tarScale
+                      }
+                    }; 
+let spellAnim2 = 
+                    {
+                     file: "modules/JB2A_DnD5e/Library/1st_Level/Cure_Wounds_INSTANTANEOUS/Cure_Wounds_Holy_200x200.webm",
+                      position: {
+                        x: tarX,
+                        y: tarY
+                      },
+                      anchor: {
+                       x: 0.5,
+                       y: 0.5
+                      },
+                      angle: 0,
+                      scale: {
+                       x: tarScale,
+                       y: tarScale
+                      }
+                    }; 
+let spellAnim3 = 
+                    {
+                     file: "modules/JB2A_DnD5e/Library/1st_Level/Cure_Wounds_INSTANTANEOUS/Cure_Wounds_Holy_200x200.webm",
+                      position: {
+                        x: tarX,
+                        y: tarY
+                      },
+                      anchor: {
+                       x: 0.5,
+                       y: 0.5
+                      },
+                      angle: 0,
+                      scale: {
+                       x: tarScale,
+                       y: tarScale
+                      }
+                    }; 
+canvas.fxmaster.playVideo(spellAnim);
+await wait (1000);
+canvas.fxmaster.playVideo(spellAnim2);
+await wait (1000);
+canvas.fxmaster.playVideo(spellAnim3);
+await wait (1000);
+game.socket.emit('module.fxmaster', spellAnim,spellAnim2,spellAnim3);
