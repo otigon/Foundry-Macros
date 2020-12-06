@@ -1,27 +1,26 @@
 /// This macro pulls from the JB2A list of Green Magic Missiles to throw 3 random paths at targeted tokens
-
 if(game.user.targets.size == 0) return ui.notifications.error('You must target at least one token');
 if(canvas.tokens.controlled.length == 0) return ui.notifications.error("Please select your token");
 
-let mmA = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_30ft_1200x400_01.webm";
-let mmB = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_30ft_1200x400_02.webm";
-let mmC = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_30ft_1200x400_03.webm";
-let mmD = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_30ft_1200x400_04.webm";
-let mmE = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_30ft_1200x400_05.webm";
-let mmF = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_30ft_1200x400_06.webm";
-let mmG = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_30ft_1200x400_07.webm";
-let mmH = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_30ft_1200x400_08.webm";
-let mmI = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_30ft_1200x400_09.webm";
+let mmA = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_01_1200x400.webm";
+let mmB = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_02_1200x400.webm";
+let mmC = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_03_1200x400.webm";
+let mmD = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_04_1200x400.webm";
+let mmE = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_05_1200x400.webm";
+let mmF = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_06_1200x400.webm";
+let mmG = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_07_1200x400.webm";
+let mmH = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_08_1200x400.webm";
+let mmI = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_09_1200x400.webm";
 
-let mmAA = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_60ft_2400x400_01.webm";
-let mmBB = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_60ft_2400x400_02.webm";
-let mmCC = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_60ft_2400x400_03.webm";
-let mmDD = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_60ft_2400x400_04.webm";
-let mmEE = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_60ft_2400x400_05.webm";
-let mmFF = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_60ft_2400x400_06.webm";
-let mmGG = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_60ft_2400x400_07.webm";
-let mmHH = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_60ft_2400x400_08.webm";
-let mmII = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/Magic_Missile_Green_60ft_2400x400_09.webm";
+let mmAA = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_01_2400x400.webm";
+let mmBB = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_02_2400x400.webm";
+let mmCC = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_03_2400x400.webm";
+let mmDD = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_04_2400x400.webm";
+let mmEE = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_05_2400x400.webm";
+let mmFF = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_06_2400x400.webm";
+let mmGG = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_07_2400x400.webm";
+let mmHH = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_08_2400x400.webm";
+let mmII = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_09_2400x400.webm";
 
 function random_itemA(itemsA)
 {
@@ -98,8 +97,10 @@ switch(true){
 
 let anScale = Math.sqrt(Math.pow(srcX-tarX,2)+Math.pow(srcY-tarY,2))/anFileSize;
 let anScaleY = anScale;
-if (anDist<=1200){anScaleY = 0.8}
-if (anDist>=1300){anScaleY = anScale}
+if (anDist<=600){anScaleY = 0.6}
+if (anDist>=700 && anDist <=1200){anScaleY = 0.8}
+if (anDist>=1300 && anDist <=1800){anScaleY = 0.6}
+if (anDist>=1900){anScaleY = anScale}
 
 if(srcX>tarX){anDeg = anDeg+180}
 if(srcX==tarX){if(srcY>tarY){anDeg=90}else{anDeg=-90}}
