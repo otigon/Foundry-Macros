@@ -1,3 +1,5 @@
+/// This macro pulls from the JB2A list of Purple Magic Missiles to throw 3 random paths at targeted tokens
+
 if(game.user.targets.size == 0) return ui.notifications.error('You must target at least one token');
 if(canvas.tokens.controlled.length == 0) return ui.notifications.error("Please select your token");
 
