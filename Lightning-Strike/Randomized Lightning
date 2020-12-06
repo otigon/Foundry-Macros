@@ -1,0 +1,54 @@
+let a = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01a_800x800.webm";
+let b = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01b_800x800.webm";
+let c = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01c_800x800.webm";
+let d = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01d_800x800.webm";
+let e = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01e_800x800.webm";
+let f = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01f_800x800.webm";
+
+function random_item(items)
+{
+return items[Math.floor(Math.random()*items.length)];
+}
+
+var items = [a, b, c, d, e, f];
+
+if(game.user.targets.size == 0) return ui.notifications.error('You must target at least one token');
+
+var myStringArray = Array.from(game.user.targets)[0];
+var arrayLength = game.user.targets.size;
+for (var i = 0; i < arrayLength; i++) {
+console.log(myStringArray[i]);
+
+let mainTarget = Array.from(game.user.targets)[i];
+let halfGrid = canvas.scene.data.grid/2;
+let tarX = (mainTarget.data.x + (mainTarget.data.width*halfGrid));
+let tarY = (mainTarget.data.y + (mainTarget.data.height*halfGrid));
+let tarScale = ((mainTarget.data.width + mainTarget.data.height)/2);
+
+async function wait(ms) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
+let spellAnim = 
+                    {
+                     file: random_item(items),
+                      position: {
+                        x: tarX,
+                        y: tarY
+                      },
+                      anchor: {
+                       x: 0.5,
+                       y: 0.5
+                      },
+                      angle: 0,
+                      scale: {
+                       x: tarScale,
+                       y: tarScale
+                      }
+                    }; 
+canvas.fxmaster.playVideo(spellAnim);
+game.socket.emit('module.fxmaster', spellAnim);
+await wait (175);
+}
