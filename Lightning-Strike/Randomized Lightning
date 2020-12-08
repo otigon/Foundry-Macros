@@ -12,7 +12,7 @@ return items[Math.floor(Math.random()*items.length)];
 
 var items = [a, b, c, d, e, f];
 
-if(game.user.targets.size == 0) return ui.notifications.error('You must target at least one token');
+if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
 
 var myStringArray = Array.from(game.user.targets)[0];
 var arrayLength = game.user.targets.size;
