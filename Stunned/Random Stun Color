@@ -22,9 +22,6 @@ for (var i = 0; i < arrayLength; i++) {
 console.log(myStringArray[i]);
 
 let mainTarget = Array.from(game.user.targets)[i];
-let halfGrid = canvas.scene.data.grid/2;
-let tarX = (mainTarget.data.x + (mainTarget.data.width*halfGrid));
-let tarY = (mainTarget.data.y + (mainTarget.data.height*halfGrid));
 let tarScale = ((mainTarget.data.width + mainTarget.data.height)/2);
 
 async function wait(ms) {
@@ -36,10 +33,7 @@ async function wait(ms) {
 let spellAnim = 
                     {
                      file: random_item(items),
-                      position: {
-                        x: tarX,
-                        y: tarY
-                      },
+                      position: mainTarget.center,
                       anchor: {
                        x: 0.5,
                        y: 0.5
