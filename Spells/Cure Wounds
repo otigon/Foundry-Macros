@@ -1,5 +1,7 @@
 if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
+const wait = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
+async function Cast() {
 var myStringArray = Array.from(game.user.targets)[0];
 var arrayLength = game.user.targets.size;
 for (var i = 0; i < arrayLength; i++) {
@@ -7,12 +9,6 @@ console.log(myStringArray[i]);
 
 let mainTarget = Array.from(game.user.targets)[i];
 let tarScale = ((mainTarget.data.width + mainTarget.data.height)/2);
-
-async function wait(ms) {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
-}
 
 let spellAnim = 
                     {
@@ -32,3 +28,5 @@ canvas.fxmaster.playVideo(spellAnim);
 game.socket.emit('module.fxmaster', spellAnim);
 await wait (75);
 }
+}
+Cast ()
