@@ -4,58 +4,46 @@ if(canvas.tokens.controlled.length == 0) return ui.notifications.error("Please s
 var myStringArray = Array.from(game.user.targets)[0];
 var arrayLength = game.user.targets.size;
 for (var i = 0; i < arrayLength; i++) {
-console.log(myStringArray[i]);
 
-if(canvas.tokens.controlled.length == 0) return ui.notifications.error("Please select your token");
 let mainTarget = Array.from(game.user.targets)[i];
 let myToken = canvas.tokens.controlled [0];
-let halfGrid = canvas.scene.data.grid/2;
-let srcX = (myToken.data.x + (myToken.data.width*halfGrid));
-let srcY = (myToken.data.y + (myToken.data.height*halfGrid));
-let tarX = (mainTarget.data.x + (mainTarget.data.width*halfGrid));
-let tarY = (mainTarget.data.y + (mainTarget.data.height*halfGrid));
-let outerRad = Math.sqrt(Math.pow(mainTarget.data.width*halfGrid,2) + Math.pow(myToken.data.width*halfGrid,2));
 
-let anDeg = -(Math.atan(((srcY - tarY)/(srcX - tarX)))*57.3);
-let anDist = Math.sqrt(Math.pow(srcX-tarX,2)+Math.pow(srcY-tarY,2));
+let ray = new Ray(myToken.center, mainTarget.center);
+let anDeg = -(ray.angle * 57.3);
+let anDist = ray.distance;
+
 async function wait(ms) {
   return new Promise(resolve => {
     setTimeout(resolve, ms);
   });
 }
 
-let anFile = "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/BoulderToss_Simple_01_30ft_1400x500.webm";
+let file = "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/";
+
+let anFile = `${file}BoulderToss_Simple_01_30ft_1400x500.webm`;
 let anFileSize = 600;
 switch(true){
  case (anDist<=1200):
     anFileSize = 1200;
-    anFile = "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/BoulderToss_Simple_01_30ft_1400x500.webm";
+    anFile = `${file}BoulderToss_Simple_01_30ft_1400x500.webm`;
     break;
- case (anDist>3600):
+ case (anDist>2400):
     anFileSize = 3600;
-    anFile = "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/BoulderToss_Simple_01_90ft_3800x500.webm";
+    anFile = `${file}BoulderToss_Simple_01_90ft_3800x500.webm`;
     break;
  default:
     anFileSize = 2400;
-    anFile = "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/BoulderToss_Simple_01_60ft_2600x500.webm";
+    anFile = `${file}BoulderToss_Simple_01_60ft_2600x500.webm`;
     break;
 }
 
-let anScale = Math.sqrt(Math.pow(srcX-tarX,2)+Math.pow(srcY-tarY,2))/anFileSize;
-let anScaleY = anScale;
-if (anDist<=600){anScaleY = 0.6}
-if (anDist>=800){anScaleY = anScale}
-
-if(srcX>tarX){anDeg = anDeg+180}
-if(srcX==tarX){if(srcY>tarY){anDeg=90}else{anDeg=-90}}
+let anScale = anDist / anFileSize;
+let anScaleY = anDist <= 600 ? 0.6  : anScale;
 
 let spellAnim = 
                     {
                      file: anFile,
-                      position: {
-                        x: srcX,
-                        y: srcY
-                      },
+                      position: myToken.center,
                       anchor: {
                        x: 0,
                        y: 0.5
