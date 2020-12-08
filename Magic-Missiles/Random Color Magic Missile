@@ -72,7 +72,9 @@ return itemsB[Math.floor(Math.random()*itemsB.length)];
 }
 
 var itemsB = [mmAA1, mmBB1, mmCC1, mmDD1, mmEE1, mmFF1, mmGG1, mmHH1, mmII1, mmAA2, mmBB2, mmCC2, mmDD2, mmEE2, mmFF2, mmGG2, mmHH2, mmII2, mmAA3, mmBB3, mmCC3, mmDD3, mmEE3, mmFF3, mmGG3, mmHH3, mmII3];
+const wait = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
+async function Cast() {
 var myStringArray = Array.from(game.user.targets)[0];
 var arrayLength = game.user.targets.size;
 for (var i = 0; i < arrayLength; i++) {
@@ -83,12 +85,6 @@ let myToken = canvas.tokens.controlled [0];
 let ray = new Ray(myToken.center, mainTarget.center);
 let anDeg = -(ray.angle * 57.3);
 let anDist = ray.distance;
-
-async function wait(ms) {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
-}
 
 let anFile = random_itemA(itemsA);
 let anFileSize = 600;
@@ -185,3 +181,5 @@ await wait (50);
 game.socket.emit('module.fxmaster', spellAnim,spellAnim2,spellAnim3);
 await wait (50);
 }
+}
+Cast ()
