@@ -13,18 +13,16 @@ return items[Math.floor(Math.random()*items.length)];
 var items = [a, b, c, d, e, f];
 
 if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
+const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
+async function Cast() {
 var myStringArray = Array.from(game.user.targets)[0];
 var arrayLength = game.user.targets.size;
 for (var i = 0; i < arrayLength; i++) {
 
-let mainTarget = Array.from(game.user.targets)[i];
+await sleepNow(175)
 
-async function wait(ms) {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
-}
+let mainTarget = Array.from(game.user.targets)[i];
 
 let spellAnim = 
                     {
@@ -42,5 +40,6 @@ let spellAnim =
                     }; 
 canvas.fxmaster.playVideo(spellAnim);
 game.socket.emit('module.fxmaster', spellAnim);
-await wait (175);
 }
+}
+Cast()
