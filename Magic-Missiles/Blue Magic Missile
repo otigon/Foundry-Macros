@@ -1,7 +1,7 @@
 /// This macro pulls from the JB2A list of Blue Magic Missiles to throw 3 random paths at targeted tokens
 
-if(game.user.targets.size == 0) return ui.notifications.error('You must target at least one token');
-if(canvas.tokens.controlled.length == 0) return ui.notifications.error("Please select your token");
+if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
+if(canvas.tokens.controlled.length == 0) ui.notifications.error("Please select your token");
 
 let mmA = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Blue_30ft_01_1200x400.webm";
 let mmB = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Blue_30ft_02_1200x400.webm";
