@@ -16,22 +16,26 @@ let ray = new Ray(myToken.center, mainTarget.center);
 let anDeg = -(ray.angle * 57.3);
 let anDist = ray.distance;
 
-let file = "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/";
+let file = "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Ranged/";
 
-let anFile = `${file}Arrow_Simple_01_30ft_1200x200.webm`;
+let anFile = `${file}Arrow_Simple_01_30ft_1600x400.webm`;
 let anFileSize = 600;
+let anchorX = 0.125;
 switch(true){
  case (anDist<=1200):
     anFileSize = 1200;
-    anFile = `${file}Arrow_Simple_01_30ft_1200x200.webm`;
+    anFile = `${file}Arrow_Simple_01_30ft_1600x400.webm`;
+    anchorX = 0.125;
     break;
  case (anDist>2400):
     anFileSize = 3600;
-    anFile = `${file}Arrow_Simple_01_90ft_3600x200.webm`;
+    anFile = `${file}Arrow_Simple_01_90ft_4000x400.webm`;
+    anchorX = 0.05;
     break;
  default:
     anFileSize = 2400;
-    anFile = `${file}Arrow_Simple_01_60ft_2400x200.webm`;
+    anFile = `${file}Arrow_Simple_01_60ft_2800x400.webm`;
+    anchorX = 0.071;
     break;
 }
 
@@ -43,7 +47,7 @@ let spellAnim =
                      file: anFile,
                       position: myToken.center,
                       anchor: {
-                       x: 0,
+                       x: anchorX,
                        y: 0.5
                       },
                       angle: anDeg,
