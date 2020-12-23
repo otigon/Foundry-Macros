@@ -1,9 +1,10 @@
-let a = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01a_800x800.webm";
-let b = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01b_800x800.webm";
-let c = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01c_800x800.webm";
-let d = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01d_800x800.webm";
-let e = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01e_800x800.webm";
-let f = "modules/JB2A_DnD5e/Library/Generic/Lightning/LightningStrike_01f_800x800.webm";
+let file = "modules/jb2a_patreon/Library/Generic/";
+let a = `${file}Lightning/LightningStrike_01a_800x800.webm`;
+let b = `${file}Lightning/LightningStrike_01b_800x800.webm`;
+let c = `${file}Lightning/LightningStrike_01c_800x800.webm`;
+let d = `${file}Lightning/LightningStrike_01d_800x800.webm`;
+let e = `${file}Lightning/LightningStrike_01e_800x800.webm`;
+let f = `${file}Lightning/LightningStrike_01f_800x800.webm`;
 
 function random_item(items)
 {
@@ -13,6 +14,7 @@ return items[Math.floor(Math.random()*items.length)];
 var items = [a, b, c, d, e, f];
 
 if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
 const wait = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
 async function Cast() {
