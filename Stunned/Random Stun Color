@@ -1,11 +1,12 @@
-let a = "modules/JB2A_DnD5e/Library/Generic/Conditions/Dizzy_Stars/DizzyStars_01_Black_200x200.webm";
-let b = "modules/JB2A_DnD5e/Library/Generic/Conditions/Dizzy_Stars/DizzyStars_01_Green_200x200.webm";
-let c = "modules/JB2A_DnD5e/Library/Generic/Conditions/Dizzy_Stars/DizzyStars_01_Orange_200x200.webm";
-let d = "modules/JB2A_DnD5e/Library/Generic/Conditions/Dizzy_Stars/DizzyStars_01_Pink_200x200.webm";
-let e = "modules/JB2A_DnD5e/Library/Generic/Conditions/Dizzy_Stars/DizzyStars_01_Purple_200x200.webm";
-let f = "modules/JB2A_DnD5e/Library/Generic/Conditions/Dizzy_Stars/DizzyStars_01_Red_200x200.webm";
-let g = "modules/JB2A_DnD5e/Library/Generic/Conditions/Dizzy_Stars/DizzyStars_01_White_200x200.webm";
-let h = "modules/JB2A_DnD5e/Library/Generic/Conditions/Dizzy_Stars/DizzyStars_01_Yellow_200x200.webm";
+let file = "modules/jb2a_patreon/Library/Generic/Conditions/Dizzy_Stars/";
+let a = `${file}DizzyStars_01_Black_200x200.webm`;
+let b = `${file}DizzyStars_01_Green_200x200.webm`;
+let c = `${file}DizzyStars_01_Orange_200x200.webm`;
+let d = `${file}DizzyStars_01_Pink_200x200.webm`;
+let e = `${file}DizzyStars_01_Purple_200x200.webm`;
+let f = `${file}DizzyStars_01_Red_200x200.webm`;
+let g = `${file}DizzyStars_01_White_200x200.webm`;
+let h = `${file}DizzyStars_01_Yellow_200x200.webm`;
 
 function random_item(items)
 {
@@ -15,6 +16,7 @@ return items[Math.floor(Math.random()*items.length)];
 var items = [a, b, c, d, e, f, g, h];
 
 if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
 const wait = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
 async function Cast() {
