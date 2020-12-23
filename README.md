@@ -6,8 +6,8 @@ Note that the file paths are set for the PATREON version. Simply edit the file l
 
 Here are a few examples of how the file is named in these macros:
 
-1. Part of a "random call"
-   \n let file = "modules/jb2a_patreon/Library/........"
+1. Part of a "random call"  
+   let file = "modules/jb2a_patreon/Library/........"
    let a = .......
    let b = ......
    
