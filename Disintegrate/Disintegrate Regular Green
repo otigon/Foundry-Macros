@@ -1,0 +1,64 @@
+if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
+if(canvas.tokens.controlled.length == 0) ui.notifications.error("Please select your token");
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
+const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
+async function Cast() {
+var myStringArray = Array.from(game.user.targets)[0];
+var arrayLength = game.user.targets.size;
+for (var i = 0; i < arrayLength; i++) {
+
+let mainTarget = Array.from(game.user.targets)[i];
+let myToken = canvas.tokens.controlled [0];
+
+let ray = new Ray(myToken.center, mainTarget.center);
+let anDeg = -(ray.angle * 57.3);
+let anDist = ray.distance;
+
+let file = "modules/jb2a_patreon/Library/6th_Level/Disintegrate/";
+
+let anFile = `${file}Disintegrate_01_Regular_Green01_15ft_1000x400.webm`;
+let anFileSize = 600;
+let anchorX = 0.2;
+switch(true){
+ case (anDist<=600):
+    anFileSize = 600;
+    anFile = `${file}Disintegrate_01_Regular_Green01_15ft_1000x400.webm`;
+    anchorX = 0.2;
+    break;
+ case (anDist>1200):
+    anFileSize = 1800;
+    anFile = `${file}Disintegrate_01_Regular_Green01_45ft_2200x400.webm`;
+    anchorX = 0.091;
+    break;
+ default:
+    anFileSize = 1200;
+    anFile = `${file}Disintegrate_01_Regular_Green01_30ft_1600x400.webm`;
+    anchorX = 0.125;
+    break;
+}
+
+let anScale = anDist / anFileSize;
+let anScaleY = anDist <= 600 ? 0.6  : anScale;
+
+let spellAnim = 
+                    {
+                     file: anFile,
+                      position: myToken.center,
+                      anchor: {
+                       x: anchorX,
+                       y: 0.5
+                      },
+                      angle: anDeg,
+                      scale: {
+                       x: anScale,
+                       y: anScaleY
+                      }
+                    }; 
+
+canvas.fxmaster.playVideo(spellAnim);
+game.socket.emit('module.fxmaster', spellAnim);
+await sleepNow(500)
+}
+}
+Cast ()
