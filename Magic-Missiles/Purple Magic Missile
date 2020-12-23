@@ -69,7 +69,7 @@ switch(true){
 
 let anFile2 = random_itemA(itemsA);
 switch(true){
- case (anDist<=1200):    
+ case (anDist<=1800):    
     anFileSize = 1200;
     anFile2 = random_itemA(itemsA);
     break;
@@ -81,7 +81,7 @@ switch(true){
 
 let anFile3 = random_itemA(itemsA);
 switch(true){
- case (anDist<=1200):
+ case (anDist<=1800):
     anFileSize = 1200;
     anFile3 = random_itemA(itemsA);
     break;
