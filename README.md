@@ -1,6 +1,6 @@
 # Foundry-Macros
 
-Update: I've updated all macros to work with the JB2A version 0.1 to account for the new naming structure and file widths. I've also added all the new attack spell macros, as well as some special effect arrows. 
+Update: I've updated all macros to work with the JB2A version 0.1 to account for the new naming structure and file widths. I've also added all the new attack spell macros, as well as some special effect arrows. Note that the file paths are set for the PATREON version. Simply edit the file location in the macro if using the free version.
 
 Simple Macros designed for use with FXMaster and MIDI-QOL Modules in Foundry VTT, and some for Token Magic Effects application. Some of these are not mine, I've just scavenged and modified others code work. Scaling could use some tweaks, but they'll play nice on most normal grid sizes in Foundry VTT. 
 
