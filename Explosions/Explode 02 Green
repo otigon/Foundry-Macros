@@ -1,0 +1,34 @@
+if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
+const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
+async function Cast() {
+var myStringArray = Array.from(game.user.targets)[0];
+var arrayLength = game.user.targets.size;
+for (var i = 0; i < arrayLength; i++) {
+console.log(myStringArray[i]);
+
+let mainTarget = Array.from(game.user.targets)[i];
+
+let tarScale = ((mainTarget.data.width + mainTarget.data.height)/2);
+
+let spellAnim = 
+                    {
+                     file: "modules/jb2a_patreon/Library/Generic/Explosion/Explosion_02_Green_400x400.webm",
+                      position: mainTarget.center,
+                      anchor: {
+                       x: 0.5,
+                       y: 0.5
+                      },
+                      angle: 0,
+                      scale: {
+                       x: 1,
+                       y: 1
+                      }
+                    }; 
+canvas.fxmaster.playVideo(spellAnim);
+game.socket.emit('module.fxmaster', spellAnim);
+await sleepNow(175);
+}
+}
+Cast ()
