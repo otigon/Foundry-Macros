@@ -1,26 +1,28 @@
-/// This macro pulls from the JB2A list of Green Magic Missiles to throw 3 random paths at targeted tokens
+/// This macro pulls from the JB2A list of Blue Magic Missiles to throw 3 random paths at targeted tokens
+
 if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
 if(canvas.tokens.controlled.length == 0) ui.notifications.error("Please select your token");
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
+let file = "modules/jb2a_patreon/Library/1st_Level/Magic_Missile/";
+let mmA = `${file}MagicMissile_01_Green_30ft_01_1600x400.webm`;
+let mmB = `${file}MagicMissile_01_Green_30ft_02_1600x400.webm`;
+let mmC = `${file}MagicMissile_01_Green_30ft_03_1600x400.webm`;
+let mmD = `${file}MagicMissile_01_Green_30ft_04_1600x400.webm`;
+let mmE = `${file}MagicMissile_01_Green_30ft_05_1600x400.webm`;
+let mmF = `${file}MagicMissile_01_Green_30ft_06_1600x400.webm`;
+let mmG = `${file}MagicMissile_01_Green_30ft_07_1600x400.webm`;
+let mmH = `${file}MagicMissile_01_Green_30ft_08_1600x400.webm`;
+let mmI = `${file}MagicMissile_01_Green_30ft_09_1600x400.webm`;
 
-let mmA = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_01_1200x400.webm";
-let mmB = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_02_1200x400.webm";
-let mmC = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_03_1200x400.webm";
-let mmD = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_04_1200x400.webm";
-let mmE = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_05_1200x400.webm";
-let mmF = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_06_1200x400.webm";
-let mmG = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_07_1200x400.webm";
-let mmH = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_08_1200x400.webm";
-let mmI = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_30ft_09_1200x400.webm";
-
-let mmAA = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_01_2400x400.webm";
-let mmBB = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_02_2400x400.webm";
-let mmCC = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_03_2400x400.webm";
-let mmDD = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_04_2400x400.webm";
-let mmEE = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_05_2400x400.webm";
-let mmFF = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_06_2400x400.webm";
-let mmGG = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_07_2400x400.webm";
-let mmHH = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_08_2400x400.webm";
-let mmII = "modules/JB2A_DnD5e/Library/1st_Level/Magic_Missile_INSTANTANEOUS/MagicMissile_01_Green_60ft_09_2400x400.webm";
+let mmAA = `${file}MagicMissile_01_Green_60ft_01_2800x400.webm`;
+let mmBB = `${file}MagicMissile_01_Green_60ft_02_2800x400.webm`;
+let mmCC = `${file}MagicMissile_01_Green_60ft_03_2800x400.webm`;
+let mmDD = `${file}MagicMissile_01_Green_60ft_04_2800x400.webm`;
+let mmEE = `${file}MagicMissile_01_Green_60ft_05_2800x400.webm`;
+let mmFF = `${file}MagicMissile_01_Green_60ft_06_2800x400.webm`;
+let mmGG = `${file}MagicMissile_01_Green_60ft_07_2800x400.webm`;
+let mmHH = `${file}MagicMissile_01_Green_60ft_08_2800x400.webm`;
+let mmII = `${file}MagicMissile_01_Green_60ft_09_2800x400.webm`;
 
 function random_itemA(itemsA)
 {
@@ -51,14 +53,17 @@ let anDist = ray.distance;
 
 let anFile = random_itemA(itemsA);
 let anFileSize = 600;
+let anchorX = 0.125;
 switch(true){
- case (anDist<=1200):
+ case (anDist<=1800):
     anFileSize = 1200;
     anFile = random_itemA(itemsA);
+    anchorX = 0.125;
     break;
  default:
     anFileSize = 2400;
     anFile = random_itemB(itemsB);
+    anchorX = 0.071;
     break;
 }
 
@@ -98,7 +103,7 @@ let spellAnim =
                      file: anFile,
                       position: myToken.center,
                       anchor: {
-                       x: 0,
+                       x: anchorX,
                        y: 0.5
                       },
                       angle: anDeg,
@@ -112,7 +117,7 @@ let spellAnim2 =
                      file: anFile2,
                       position: myToken.center,
                       anchor: {
-                       x: 0,
+                       x: anchorX,
                        y: 0.5
                       },
                       angle: anDeg,
@@ -126,7 +131,7 @@ let spellAnim3 =
                      file: anFile3,
                       position: myToken.center,
                       anchor: {
-                       x: 0,
+                       x: anchorX,
                        y: 0.5
                       },
                       angle: anDeg,
