@@ -1,5 +1,6 @@
 if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
 if(canvas.tokens.controlled.length == 0) ui.notifications.error("Please select your token");
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
 const wait = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
 async function Cast() {
@@ -16,22 +17,26 @@ let ray = new Ray(myToken.center, mainTarget.center);
 let anDeg = -(ray.angle * 57.3);
 let anDist = ray.distance;
 
-let file = "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/";
+let file = "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Ranged/";
 
-let anFile = `${file}BoulderToss_Simple_01_30ft_1400x500.webm`;
-let anFileSize = 600;
+let anFile = `${file}BoulderToss_Simple_01_30ft_1600x500.webm`;
+let anFileSize = 1200;
+let anchorX = 0.125;
 switch(true){
  case (anDist<=1200):
     anFileSize = 1200;
-    anFile = `${file}BoulderToss_Simple_01_30ft_1400x500.webm`;
+    anFile = `${file}BoulderToss_Simple_01_30ft_1600x500.webm`;
+    anchorX = 0.125;
     break;
  case (anDist>2400):
     anFileSize = 3600;
-    anFile = `${file}BoulderToss_Simple_01_90ft_3800x500.webm`;
+    anFile = `${file}BoulderToss_Simple_01_90ft_4000x500.webm`;
+    anchorX = 0.05;
     break;
  default:
     anFileSize = 2400;
-    anFile = `${file}BoulderToss_Simple_01_60ft_2600x500.webm`;
+    anFile = `${file}BoulderToss_Simple_01_60ft_2800x500.webm`;
+    anchorX = 0.071;
     break;
 }
 
@@ -43,7 +48,7 @@ let spellAnim =
                      file: anFile,
                       position: myToken.center,
                       anchor: {
-                       x: 0,
+                       x: anchorX,
                        y: 0.5
                       },
                       angle: anDeg,
