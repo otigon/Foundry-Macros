@@ -1,5 +1,6 @@
 if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
 if(canvas.tokens.controlled.length == 0) ui.notifications.error("Please select your token");
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
 const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
 async function Cast() {
@@ -14,22 +15,30 @@ let ray = new Ray(myToken.center, mainTarget.center);
 let anDeg = -(ray.angle * 57.3);
 let anDist = ray.distance;
 
-let file = "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/";
+let file = "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Ranged/";
 
-let anFile = `${file}Arrow_Simple_01_30ft_1200x200.webm`;
+let anFile = `${file}Arrow_Simple_01_30ft_1600x400.webm`;
 let anFileSize = 600;
+let anchorX = 0.125;
+let boom = 1000;
 switch(true){
  case (anDist<=1200):
     anFileSize = 1200;
-    anFile = `${file}Arrow_Simple_01_30ft_1200x200.webm`;
+    anFile = `${file}Arrow_Simple_01_30ft_1600x400.webm`;
+    anchorX = 0.125;
+    boom = 1250;
     break;
  case (anDist>2400):
     anFileSize = 3600;
-    anFile = `${file}Arrow_Simple_01_90ft_3600x200.webm`;
+    anFile = `${file}Arrow_Simple_01_90ft_4000x400.webm`;
+    anchorX = 0.05;
+    boom = 1750;
     break;
  default:
     anFileSize = 2400;
-    anFile = `${file}Arrow_Simple_01_60ft_2400x200.webm`;
+    anFile = `${file}Arrow_Simple_01_60ft_2800x400.webm`;
+    anchorX = 0.071;
+    boom = 1500;
     break;
 }
 
@@ -41,7 +50,7 @@ let spellAnim =
                      file: anFile,
                       position: myToken.center,
                       anchor: {
-                       x: 0,
+                       x: anchorX,
                        y: 0.5
                       },
                       angle: anDeg,
@@ -53,7 +62,7 @@ let spellAnim =
 
 let spellAnim2 = 
                     {
-                     file: "modules/animated-spell-effects-cartoon/spell-effects/cartoon/fire/fire_explosion_CIRCLE_06.webm",
+                     file: "modules/jb2a_patreon/Library/Generic/Explosion/Explosion_01_Orange_400x400.webm",
                       position: mainTarget.center,
                       anchor: {
                        x: 0.5,
@@ -67,7 +76,7 @@ let spellAnim2 =
                     }; 
 
 canvas.fxmaster.playVideo(spellAnim);
-await sleepNow(1000);
+await sleepNow(boom);
 canvas.fxmaster.playVideo(spellAnim2);
 await sleepNow(250);
 game.socket.emit('module.fxmaster', spellAnim,spellAnim2);
