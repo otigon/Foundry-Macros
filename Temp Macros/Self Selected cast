@@ -1,0 +1,24 @@
+if(canvas.tokens.controlled.length == 0) ui.notifications.error("Please select your token");
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
+const wait = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
+async function Cast() {
+let myToken = canvas.tokens.controlled [0];
+let spellAnim = 
+                    {
+                     file: "modules/jb2a_patreon/Library/1st_Level/Cure_Wounds/CureWounds_01_Blue_200x200.webm",
+                      position: myToken.center,
+                      anchor: {
+                       x: 0.5,
+                       y: 0.5
+                      },
+                      angle: 0,
+                      scale: {
+                       x: 1,
+                       y: 1
+                      }
+                    }; 
+canvas.fxmaster.playVideo(spellAnim);
+game.socket.emit('module.fxmaster', spellAnim);
+}
+Cast ()
