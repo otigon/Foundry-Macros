@@ -1,0 +1,64 @@
+//Finds the center of a circular template and plays an animation file once using FXMaster
+async function SpellAnimation() {
+    const templateID = canvas.templates.placeables[canvas.templates.placeables.length - 1].data._id;
+    let template = await canvas.templates.get(templateID);
+    let gridSize = canvas.scene.data.grid;
+    let Scale = canvas.scene.data.grid/200;
+    let myToken = canvas.tokens.controlled [0];
+    let file = "modules/jb2a_patreon/Library/Cantrip/Thunderwave/";
+
+let anFile = `${file}Thunderwave_01_Bright_Blue_Bmid_600x600.webm`;
+let ang = 0;
+switch(true){
+   case ((myToken.data.x==(template.x + gridSize)) && (myToken.data.y==(template.y + gridSize))):
+      ang = 0;
+      anFile = `${file}Thunderwave_01_Bright_Blue_Center_600x600.webm`;
+      break;
+   case ((myToken.data.x==(template.x - gridSize)) && (myToken.data.y==(template.y - gridSize))):
+      ang = 270;
+      anFile = `${file}Thunderwave_01_Bright_Blue_BLeft_600x600.webm`;
+      break;
+   case ((myToken.data.x==(template.x + (gridSize * 3))) && (myToken.data.y==(template.y - gridSize))):
+      ang = 180;
+      anFile = `${file}Thunderwave_01_Bright_Blue_BLeft_600x600.webm`;
+      break;
+   case ((myToken.data.x==(template.x + (gridSize * 3))) && (myToken.data.y==(template.y + (gridSize * 3)))):
+      ang = 90;
+      anFile = `${file}Thunderwave_01_Bright_Blue_BLeft_600x600.webm`;
+      break;
+   case ((myToken.data.x==(template.x - gridSize)) && (myToken.data.y==(template.y + (gridSize * 3)))):
+      ang = 0;
+      anFile = `${file}Thunderwave_01_Bright_Blue_BLeft_600x600.webm`;
+      break;
+   case (myToken.data.x>template.x && ((myToken.y>=template.y) && myToken.y < (template.y + (gridSize*3)))):
+      ang = 90;
+      break;
+   case (myToken.data.x<template.x && myToken.y>=template.y):
+      ang = 270;
+      break;
+   case (myToken.data.x>=template.x && myToken.y<template.y):
+      ang = 180;
+      break;
+}
+   
+    let spellAnim = 
+                    {
+                     file: anFile,
+                      position: {
+                       x: (template.x + (gridSize * 1.5)),
+                       y: (template.y + (gridSize * 1.5))
+                      },
+                      anchor: {
+                       x: 0.5,
+                       y: 0.5
+                      },
+                      angle: ang,
+                      scale: {
+                       x: Scale,
+                       y: Scale
+                      }
+                    };
+canvas.fxmaster.playVideo(spellAnim);
+game.socket.emit('module.fxmaster', spellAnim);
+}
+SpellAnimation();
