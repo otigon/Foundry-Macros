@@ -1,10 +1,10 @@
-//Finds the center of a circular template and plays an animation file once using FXMaster
+//Positional Macro for Thunderwave. Reads the Token Position around and inside the template to choose which animation to play.
 async function SpellAnimation() {
     const templateID = canvas.templates.placeables[canvas.templates.placeables.length - 1].data._id;
     let template = await canvas.templates.get(templateID);
     let gridSize = canvas.scene.data.grid;
     let Scale = canvas.scene.data.grid/200;
-    let myToken = canvas.tokens.controlled [0];
+    const myToken = game.actors.get(args[0].actor._id).getActiveTokens()[0];
 // THIS IS NOT THE UPDATED JB2A location!! 
     let file = "modules/jb2a_patreon/Library/Cantrip/Thunderwave/";
 
