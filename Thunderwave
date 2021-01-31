@@ -5,12 +5,13 @@ async function SpellAnimation() {
     let gridSize = canvas.scene.data.grid;
     let Scale = canvas.scene.data.grid/200;
     let myToken = canvas.tokens.controlled [0];
+// THIS IS NOT THE UPDATED JB2A location!! 
     let file = "modules/jb2a_patreon/Library/Cantrip/Thunderwave/";
 
 let anFile = `${file}Thunderwave_01_Bright_Blue_Bmid_600x600.webm`;
 let ang = 0;
 switch(true){
-   case ((myToken.data.x==(template.x + gridSize)) && (myToken.data.y==(template.y + gridSize))):
+   case ((myToken.data.x>=template.x && myToken.data.x<=(template.x + (gridSize *2))) && (myToken.data.y>=template.y && myToken.data.y<=(template.y + (gridSize *2)))):
       ang = 0;
       anFile = `${file}Thunderwave_01_Bright_Blue_Center_600x600.webm`;
       break;
