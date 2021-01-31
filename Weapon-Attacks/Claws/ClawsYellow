@@ -1,0 +1,33 @@
+if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
+const wait = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
+async function Cast() {
+var myStringArray = Array.from(game.user.targets)[0];
+var arrayLength = game.user.targets.size;
+for (var i = 0; i < arrayLength; i++) {
+console.log(myStringArray[i]);
+
+let mainTarget = Array.from(game.user.targets)[i];
+let tarScale = ((mainTarget.data.width + mainTarget.data.height)/4);
+
+let spellAnim = 
+                    {
+                     file: "modules/jb2a_patreon/Library/Generic/Creature/Claws_01_Bright_Yellow_400x400.webm",
+                      position: mainTarget.center,
+                      anchor: {
+                       x: 0.5,
+                       y: 0.5
+                      },
+                      angle: 0,
+                      scale: {
+                       x: tarScale,
+                       y: tarScale
+                      }
+                    }; 
+canvas.fxmaster.playVideo(spellAnim);
+game.socket.emit('module.fxmaster', spellAnim);
+await wait (75);
+}
+}
+Cast ()
