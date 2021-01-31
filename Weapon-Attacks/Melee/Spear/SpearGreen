@@ -1,0 +1,35 @@
+if(game.user.targets.size == 0) ui.notifications.error('You must target at least one token');
+if(canvas.tokens.controlled.length == 0) ui.notifications.error("Please select your token");
+if (!canvas.fxmaster) ui.notifications.error("This macro depends on the FXMaster module. Make sure it is installed and enabled");
+
+const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
+async function Cast() {
+
+// Scaled globally for consistency across scenes. Change divisor for size of animation
+let Scale = canvas.scene.data.grid/175;
+function castSpell(effect) {
+  const tokens = canvas.tokens.controlled;
+  game.user.targets.forEach((i, t) => {
+    canvas.fxmaster.drawSpecialToward(effect, tokens[0], t);
+    
+  });
+}
+
+let file = "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Melee/";
+
+castSpell({
+  file: `${file}Spear01_Fire_Bright_Green_800x600.webm`,
+  anchor: {
+    x: 0.4,
+    y: 0.5,
+  },
+  speed: 0,
+  angle: 0,
+  scale: {
+    x: Scale,
+    y: Scale,
+  },
+});
+}
+Cast ()
