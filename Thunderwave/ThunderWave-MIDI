@@ -14,6 +14,7 @@ const wait = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
     let gridSize = canvas.scene.data.grid;
     let Scale = canvas.scene.data.grid/200;
     let myToken = canvas.tokens.get(lastArg.tokenId) || canvas.tokens.placeables.find(token => token.actor.items.get(item._id) != null)
+// Change this file path if you are on the free module
     let file = "modules/jb2a_patreon/Library/1st_Level/Thunderwave/";
 
 let anFile = `${file}Thunderwave_01_Bright_Blue_Bmid_600x600.webm`;
@@ -83,7 +84,7 @@ SpellAnimation(3);
 
 // Add some sound
 /*
-await sleepNow(100);
+await wait (100);
 let soundFile = `sound path here`;
 AudioHelper.play({src: soundFile, volume: 1.0, autoplay: true, loop: false}, true);
 */
