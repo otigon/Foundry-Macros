@@ -1,3 +1,9 @@
+I'm probably not going to be updating these anymore. I've moved all these macros to a manual install Module located at https://github.com/otigon/otigons-animation-macros
+
+Check it out if you want, All the macros are updated to the latest JB2A animations with sounds, Token Magic FX, etc.
+
+
+
 # Foundry-Macros
 
 Update: I've updated all macros to work with the JB2A version 0.1 to account for the new naming structure and file widths. I've also added all the new attack spell macros, as well as some special effect arrows. 
